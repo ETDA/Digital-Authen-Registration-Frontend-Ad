@@ -1,0 +1,44 @@
+﻿@model UAF_Frontend_Registration.Models.User
+
+@using Microsoft.AspNetCore.Http;
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<partial name="_Nav" />
+
+<br />
+<br />
+
+<div style="text-align: center">
+    <img class="responsive3"
+         src="~/ogo_digiAuthen_3.png"
+         alt="" />
+</div>
+
+<br />
+<br />
+
+@using (Html.BeginForm("Register", "Home", FormMethod.Post))
+{
+    var email = Context.Session.GetString("User");
+    if (!string.IsNullOrEmpty(email))
+    {
+        <div class="text-center">
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <p style="font-size: 22px">Your username: @email</p>
+                <input id="email" name="email" type="hidden" value="@email" /><br />
+                <input type="submit" name="submit" class="btn btn-reg" value="Click here to Registration" onclick="getInputValue();" />
+            </div>
+        </div>
+    }
+
+    <p id="show_spiner"></p>
+    <script>
+        function getInputValue() {
+            document.getElementById("show_spiner").innerHTML = "<div class=\"loading\"></div>";
+        }
+    </script>
+}
